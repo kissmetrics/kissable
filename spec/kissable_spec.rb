@@ -18,5 +18,17 @@ describe Kissable do
       expect(described_class.tracking_script(identity)).to include("['set', {'#{test_name}' : 'Original'}]")
     end
   end
+
+  describe ".configure" do
+    let(:data) { '123' }
+
+    it "sets the configuration" do
+      Kissable.configure do |config|
+        config.domain = data
+      end
+
+      expect(Kissable.configuration.domain).to eq(data)
+    end
+  end
 end
 

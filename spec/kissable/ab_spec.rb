@@ -95,26 +95,45 @@ describe Kissable::AB do
         expect{identity}.to change{ab_test.cookies}.from({})
       end
 
-      describe "the new cookie" do
+      describe "the cookie" do
         let(:cookie) { ab_test.cookies['abid'] }
 
-        before :each do
-          identity
+        context "when the domain has been configured" do
+          let(:domain) { 'someaweseomedomain.com' }
+
+          it "has the domain key set to the correct value" do
+            Kissable.configure do |config|
+              config.domain = domain
+            end
+
+            identity
+            expect(cookie).to include(:domain => domain)
+          end
         end
 
-        xit "has the domain set to top level" do
-          expect(cookie).to include(:domain => ".kissmetrics.com")
+        context "when the domain hasn't been configured" do
+          it "doesn't include a domain key" do
+            Kissable.configure do |config|
+              config.domain = nil
+            end
+
+            identity
+            expect(cookie).to_not include(:domain)
+          end
         end
 
         it "expires" do
+          identity
           expect(cookie).to include(:expires)
         end
 
         it "has a path" do
+          identity
           expect(cookie).to include(:path => "/")
         end
 
         it "contains a value" do
+          identity
           expect(cookie).to include(:value)
         end
       end

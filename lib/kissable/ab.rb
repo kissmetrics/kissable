@@ -60,9 +60,8 @@ module Kissable
     # Simply reads/sets the cookie used for control
     def ab_cookie_value
       if cookie_exists?
-        # TODO: Add a logger
-        # Rails.logger.info("Returning User: #{abid}")
         abid = cookie.to_i
+        Kissable.configuration.logger.info("Returning User: #{abid}")
       else
         abid = cookie_value
         set_cookie(abid)
@@ -80,11 +79,17 @@ module Kissable
     end
 
     def cookie_data
-      { :value => cookie_value.to_s,
+      default_values = {
+        :value => cookie_value.to_s,
         :path => '/',
         :expires => Time.now + 52 * 604800
-        # :domain => '.kissmetrics.com'
       }
+
+      if Kissable.configuration.domain
+        default_values.merge!(:domain => Kissable.configuration.domain)
+      end
+
+      return default_values
     end
 
     def cookie_name
