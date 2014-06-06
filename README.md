@@ -72,6 +72,17 @@ ab = Kissable::AB.new('some cool test')
 ab.identity(sca)
 ```
 
+### Configuration
+
+Kissable allows you some potential configurations.
+
+```ruby
+Kissable.configure do |config|
+  config.logger = Logger.new(STDOUT)
+  config.domain = '.kissmetrics.com'
+end
+```
+
 ## Contributing
 
 1. Fork it
