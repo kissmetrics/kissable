@@ -40,7 +40,7 @@ def index
   @users_identity = @ab_test.identity
 
   case @users_identity.id
-  switch 'Original'
+  when 'Original'
     render 'index'
   else
     render 'index-variant'
