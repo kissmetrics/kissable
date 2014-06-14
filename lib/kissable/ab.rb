@@ -7,11 +7,11 @@ module Kissable
 
     attr_reader :groups, :ratios, :test_name
 
-    def initialize(test_name, groups=nil, ratios=nil)
+    def initialize(test_name, groups = nil, ratios = nil)
       @test_name = test_name
 
       @groups = groups
-      @groups ||= %w{Original Variant}
+      @groups ||= %w(Original Variant)
 
       @ratios = ratios
       @ratios ||= [100.0 / @groups.length] * @groups.length
@@ -54,7 +54,7 @@ module Kissable
       @abset if @abset
 
       sum = 0
-      @abset = Hash.new
+      @abset = {}
       @abset = groups.zip(ratios.map! { |i| sum += i })
     end
 
@@ -90,7 +90,7 @@ module Kissable
         default_values.merge!(:domain => Kissable.configuration.domain)
       end
 
-      return default_values
+      default_values
     end
 
     def cookie_name
@@ -103,10 +103,10 @@ module Kissable
     end
 
     def validate_ratios
-      unless ratios.length == groups.length
-        raise ArgumentError, 'Mismatch with groups and ratios'
-      end
+      raise ArgumentError, 'Mismatch with groups and ratios' unless ratios.length == groups.length
+
       total = ratios.inject(0) { |tot, rate| tot + rate.to_i }
+
       raise ArgumentError, "ABHelper ratios sum to #{total} not 100" unless total == 100
     end
   end
