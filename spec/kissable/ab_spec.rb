@@ -23,15 +23,17 @@ describe Kissable::AB do
         let(:groups) { ["one"] }
 
         it "raises an error" do
-          expect{ ab_test }.to raise_error(ArgumentError, 'A minimium of two groups are required')
+          expect { ab_test }.to
+          raise_error(ArgumentError, 'A minimium of two groups are required')
         end
       end
 
       context "with five groups" do
-        let(:groups) { ["one", "two", "three", "four", "five"] }
+        let(:groups) { %w("one", "two", "three", "four", "five") }
 
         it "raises an error" do
-          expect{ ab_test }.to raise_error(ArgumentError, "The max number of split groups is 4")
+          expect { ab_test }.to
+          raise_error(ArgumentError, "The max number of split groups is 4")
         end
       end
 
@@ -43,19 +45,21 @@ describe Kissable::AB do
 
       context "with a mismatch of ratios to groups" do
         let(:ratios) { [100] }
-        let(:groups) { ["one", "two"] }
+        let(:groups) { %w("one", "two") }
 
         it "raises an error" do
-          expect{ab_test}.to raise_error(ArgumentError, "Mismatch with groups and ratios")
+          expect { ab_test }.to
+          raise_error(ArgumentError, "Mismatch with groups and ratios")
         end
       end
 
       context "when ratios don't add up to 100" do
         let(:ratios) { [90, 5] }
-        let(:groups) { ["one", "two"] }
+        let(:groups) { %w("one", "two") }
 
         it "raises an error" do
-          expect{ab_test}.to raise_error(ArgumentError, "ABHelper ratios sum to 95 not 100")
+          expect { ab_test }.to
+          raise_error(ArgumentError, "ABHelper ratios sum to 95 not 100")
         end
       end
     end
@@ -82,17 +86,17 @@ describe Kissable::AB do
 
     context "when cookie exists" do
       before :each do
-        ab_test.stub(:cookies).and_return({'abid' => 1})
+        ab_test.stub(:cookies).and_return('abid' => 1)
       end
 
       it "doesn't change the cookie" do
-        expect{identity}.to_not change{ab_test.cookies}
+        expect { identity }.to_not change { ab_test.cookies }
       end
     end
 
     context "when cookie doesn't exist" do
       it "sets a cookie" do
-        expect{identity}.to change{ab_test.cookies}.from({})
+        expect { identity }.to change { ab_test.cookies }.from({})
       end
 
       describe "the cookie" do
