@@ -1,0 +1,278 @@
+Style/AccessorMethodName:
+  Enabled: true
+
+Style/Alias:
+  Enabled: false
+
+Style/ArrayJoin:
+  Enabled: true
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/AsciiIdentifiers:
+  Enabled: true
+
+Style/Attr:
+  Enabled: true
+
+Style/BlockNesting:
+  Enabled: true
+  Max: 3
+
+Style/CaseEquality:
+  Enabled: true
+
+Style/CharacterLiteral:
+  Enabled: true
+
+Style/ClassLength:
+  Enabled: true
+  Max: 150
+
+Style/ClassVars:
+  Enabled: false
+
+Style/CollectionMethods:
+  PreferredMethods:
+    find: detect
+    reduce: inject
+    collect: map
+    find_all: select
+
+Style/ColonMethodCall:
+  Enabled: true
+
+Style/CommentAnnotation:
+  Enabled: true
+
+Style/CyclomaticComplexity:
+  Enabled: true
+  Max: 6
+
+# Because Ruby 1.8.6
+Style/DeprecatedHashMethods:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+# TODO: Figure out which one
+Style/DotPosition:
+  EnforcedStyle: trailing
+
+# LOL. This one will piss off Waffles.
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EmptyLiteral:
+  Enabled: true
+
+Style/Encoding:
+  Enabled: false
+
+Style/EvenOdd:
+  Enabled: true
+
+Style/FileName:
+  Enabled: true
+
+Style/FlipFlop:
+  Enabled: true
+
+# TODO: Discussion?
+# Example: apps/api/routes/billing_plan.rb:73:30
+Style/FormatString:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: true
+
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+
+# TODO: Discussion?
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/IfWithSemicolon:
+  Enabled: true
+
+# This is a Ruby 1.9 thing.
+Style/Lambda:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: true
+
+Style/LineEndConcatenation:
+  Enabled: true
+
+Style/LineLength:
+  Max: 80
+
+Style/MethodLength:
+  Enabled: true
+  CountComments: false
+  Max: 10
+
+Style/ModuleFunction:
+  Enabled: true
+
+Style/NegatedIf:
+  Enabled: true
+
+Style/NegatedWhile:
+  Enabled: true
+
+Style/NilComparison:
+  Enabled: true
+
+Style/Not:
+  Enabled: true
+
+Style/NumericLiterals:
+  Enabled: false
+
+# Nate likes this.
+Style/OneLineConditional:
+  Enabled: false
+
+Style/OpMethod:
+  Enabled: true
+
+Style/ParameterLists:
+  Enabled: true
+  Max: 5
+  CountKeywordArgs: true
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%': '{}'
+
+Style/PerlBackrefs:
+  Enabled: true
+
+Style/PredicateName:
+  NamePrefixBlacklist:
+    - is_
+
+Style/Proc:
+  Enabled: true
+
+Style/RaiseArgs:
+  Enabled: true
+  EnforcedStyle: exploded
+
+Style/RegexpLiteral:
+  Enabled: true
+
+Style/SelfAssignment:
+  Enabled: true
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/SingleLineMethods:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: true
+  EnforcedStyle: only_raise
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+  EnforcedStyle: double_quotes
+
+Style/TrailingComma:
+  Enabled: true
+
+Style/TrivialAccessors:
+  Enabled: true
+
+Style/VariableInterpolation:
+  Enabled: true
+
+Style/WhenThen:
+  Enabled: false
+
+Style/WhileUntilModifier:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: true
+
+# THESE ARE ALL FINISHED.
+
+# Lint
+
+Lint/AmbiguousOperator:
+  Enabled: true
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: true
+
+Lint/AssignmentInCondition:
+  Enabled: true
+
+Lint/ConditionPosition:
+  Enabled: true
+
+Lint/DeprecatedClassMethods:
+  Enabled: true
+
+Lint/ElseLayout:
+  Enabled: true
+
+Lint/HandleExceptions:
+  Enabled: true
+
+Lint/InvalidCharacterLiteral:
+  Enabled: false
+
+Lint/LiteralInCondition:
+  Enabled: true
+
+Lint/LiteralInInterpolation:
+  Enabled: true
+
+Lint/Loop:
+  Enabled: false
+
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: true
+
+Lint/RequireParentheses:
+  Enabled: true
+
+Lint/UnderscorePrefixedVariableName:
+  Enabled: true
+
+Lint/Void:
+  Enabled: false
+
+# Rails
+
+Rails/ActionFilter:
+  Enabled: false
+
+Rails/DefaultScope:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/ReadWriteAttribute:
+  Enabled: false
+
+Rails/ScopeArgs:
+  Enabled: false
+
+Rails/Validation:
+  Enabled: false
+
+Rails/Output:
+  Enabled: false
