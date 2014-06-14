@@ -24,7 +24,7 @@ describe Kissable::AB do
 
         it "raises an error" do
           message = 'A minimium of two groups are required'
-          expect { ab_test }.to raise_error(ArgumentError, message)
+          expect { ab_test }.to raise_error(Kissable::OneGroupError, message)
         end
       end
 
@@ -32,8 +32,9 @@ describe Kissable::AB do
         let(:groups) { %w("one", "two", "three", "four", "five") }
 
         it "raises an error" do
-          message = "The max number of split groups is 4"
-          expect { ab_test }.to raise_error(ArgumentError, message)
+          message = "The max number of groups is 4"
+          expect { ab_test }.to raise_error(Kissable::TooManyGroupsError,
+                                            message)
         end
       end
 

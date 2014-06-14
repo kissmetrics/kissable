@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'kissable/errors'
 
 module Kissable
   class AB
@@ -97,8 +98,8 @@ module Kissable
     end
 
     def validate_groups
-      raise ArgumentError, 'A minimium of two groups are required' if groups.length < 2
-      raise ArgumentError, "The max number of split groups is #{MAX_GROUP_COUNT}" if groups.length > MAX_GROUP_COUNT
+      raise OneGroupError if groups.length < 2
+      raise TooManyGroupsError if groups.length > MAX_GROUP_COUNT
     end
 
     def validate_ratios
