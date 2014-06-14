@@ -23,8 +23,8 @@ describe Kissable::AB do
         let(:groups) { ["one"] }
 
         it "raises an error" do
-          expect { ab_test }.to
-          raise_error(ArgumentError, 'A minimium of two groups are required')
+          message = 'A minimium of two groups are required'
+          expect { ab_test }.to raise_error(ArgumentError, message)
         end
       end
 
@@ -32,8 +32,8 @@ describe Kissable::AB do
         let(:groups) { %w("one", "two", "three", "four", "five") }
 
         it "raises an error" do
-          expect { ab_test }.to
-          raise_error(ArgumentError, "The max number of split groups is 4")
+          message = "The max number of split groups is 4"
+          expect { ab_test }.to raise_error(ArgumentError, message)
         end
       end
 
@@ -48,8 +48,8 @@ describe Kissable::AB do
         let(:groups) { %w("one", "two") }
 
         it "raises an error" do
-          expect { ab_test }.to
-          raise_error(ArgumentError, "Mismatch with groups and ratios")
+          message = "Mismatch with groups and ratios"
+          expect { ab_test }.to raise_error(ArgumentError, message)
         end
       end
 
@@ -58,8 +58,8 @@ describe Kissable::AB do
         let(:groups) { %w("one", "two") }
 
         it "raises an error" do
-          expect { ab_test }.to
-          raise_error(ArgumentError, "ABHelper ratios sum to 95 not 100")
+          message = "ABHelper ratios sum to 95 not 100"
+          expect { ab_test }.to raise_error(ArgumentError, message)
         end
       end
     end
