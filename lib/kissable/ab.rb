@@ -63,7 +63,7 @@ module Kissable
         abid = cookie.to_i
         Kissable.configuration.logger.info("Returning User: #{abid}")
       else
-        abid = cookie_value
+        abid = rand(10000000)
         set_cookie(abid)
       end
 
@@ -75,10 +75,10 @@ module Kissable
     end
 
     def set_cookie(cookie_value)
-      cookies[cookie_name] = cookie_data
+      cookies[cookie_name] = cookie_data(cookie_value)
     end
 
-    def cookie_data
+    def cookie_data(cookie_value)
       default_values = {
         :value => cookie_value.to_s,
         :path => '/',
@@ -94,10 +94,6 @@ module Kissable
 
     def cookie_name
       'abid'
-    end
-
-    def cookie_value
-      rand(10000000)
     end
 
     def validate_groups
