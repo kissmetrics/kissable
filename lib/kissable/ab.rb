@@ -19,11 +19,11 @@ module Kissable
       validate_ratios
     end
 
-    def identity(cookies)
+    def group(cookies)
       @cookies = cookies
 
       abset.each do |i, val|
-        return abid_object.new(i, test_name) if val > seed
+        return i if val > seed
       end
     end
 
@@ -35,10 +35,6 @@ module Kissable
 
     def cookie_exists?
       cookie && cookie != ''
-    end
-
-    def abid_object
-      @abid_object ||= Struct.new(:id, :name)
     end
 
     def sha
