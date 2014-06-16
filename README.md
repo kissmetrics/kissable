@@ -48,10 +48,12 @@ def index
 end
 ```
 
-* Inside of the individual template files, you can add KISSmetrics tracking code by passing the user's identity into the `Kissable.tracking_script` class method.
+* Inside of the individual template files, you can add KISSmetrics tracking code by passing the user's group into the `#tracking_script` instance method.
 
 ```ruby
-  Kissable.tracking_script(@users_identity)
+  ab_test = Kissable::AB.new('top-navigation test')
+  users_ab_group = ab_test.group(cookies)
+  ab_test.tracking_script(users_ab_group)
 ```
 
 ### Rails
