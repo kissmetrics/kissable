@@ -1,2 +1,278 @@
-Style/StringLiterals:
+AccessorMethodName:
+  Enabled: true
+
+Alias:
+  Enabled: false
+
+ArrayJoin:
+  Enabled: true
+
+AsciiComments:
+  Enabled: false
+
+AsciiIdentifiers:
+  Enabled: true
+
+Attr:
+  Enabled: true
+
+BlockNesting:
+  Enabled: true
+  Max: 3
+
+CaseEquality:
+  Enabled: true
+
+CharacterLiteral:
+  Enabled: true
+
+ClassLength:
+  Enabled: true
+  Max: 150
+
+ClassVars:
+  Enabled: false
+
+CollectionMethods:
+  PreferredMethods:
+    find: detect
+    reduce: inject
+    collect: map
+    find_all: select
+
+ColonMethodCall:
+  Enabled: true
+
+CommentAnnotation:
+  Enabled: true
+
+CyclomaticComplexity:
+  Enabled: true
+  Max: 6
+
+# Because Ruby 1.8.6
+DeprecatedHashMethods:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+# TODO: Figure out which one
+DotPosition:
+  EnforcedStyle: trailing
+
+# LOL. This one will piss off Waffles.
+DoubleNegation:
+  Enabled: false
+
+EmptyLiteral:
+  Enabled: true
+
+Encoding:
+  Enabled: false
+
+EvenOdd:
+  Enabled: true
+
+FileName:
+  Enabled: true
+
+FlipFlop:
+  Enabled: true
+
+# TODO: Discussion?
+# Example: apps/api/routes/billing_plan.rb:73:30
+FormatString:
+  Enabled: false
+
+GlobalVars:
+  Enabled: true
+
+HashSyntax:
+  EnforcedStyle: hash_rockets
+
+# TODO: Discussion?
+IfUnlessModifier:
+  Enabled: false
+
+IfWithSemicolon:
+  Enabled: true
+
+# This is a Ruby 1.9 thing.
+Lambda:
+  Enabled: false
+
+LambdaCall:
+  Enabled: true
+
+LineEndConcatenation:
+  Enabled: true
+
+LineLength:
+  Max: 80
+
+MethodLength:
+  Enabled: true
+  CountComments: false
+  Max: 10
+
+ModuleFunction:
+  Enabled: true
+
+NegatedIf:
+  Enabled: true
+
+NegatedWhile:
+  Enabled: true
+
+NilComparison:
+  Enabled: true
+
+Not:
+  Enabled: true
+
+NumericLiterals:
+  Enabled: false
+
+# Nate likes this.
+OneLineConditional:
+  Enabled: false
+
+OpMethod:
+  Enabled: true
+
+ParameterLists:
+  Enabled: true
+  Max: 5
+  CountKeywordArgs: true
+
+PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%': '{}'
+
+PerlBackrefs:
+  Enabled: true
+
+PredicateName:
+  NamePrefixBlacklist:
+    - is_
+
+Proc:
+  Enabled: true
+
+RaiseArgs:
+  Enabled: true
+  EnforcedStyle: exploded
+
+RegexpLiteral:
+  Enabled: true
+
+SelfAssignment:
+  Enabled: true
+
+SingleLineBlockParams:
+  Enabled: false
+
+SingleLineMethods:
+  Enabled: false
+
+SignalException:
+  Enabled: true
+  EnforcedStyle: only_raise
+
+SpecialGlobalVars:
+  Enabled: false
+
+StringLiterals:
+  Enabled: false
   EnforcedStyle: double_quotes
+
+TrailingComma:
+  Enabled: true
+
+TrivialAccessors:
+  Enabled: true
+
+VariableInterpolation:
+  Enabled: true
+
+WhenThen:
+  Enabled: false
+
+WhileUntilModifier:
+  Enabled: false
+
+WordArray:
+  Enabled: true
+
+# THESE ARE ALL FINISHED.
+
+# Lint
+
+AmbiguousOperator:
+  Enabled: true
+
+AmbiguousRegexpLiteral:
+  Enabled: true
+
+AssignmentInCondition:
+  Enabled: true
+
+ConditionPosition:
+  Enabled: true
+
+DeprecatedClassMethods:
+  Enabled: true
+
+ElseLayout:
+  Enabled: true
+
+HandleExceptions:
+  Enabled: true
+
+InvalidCharacterLiteral:
+  Enabled: false
+
+LiteralInCondition:
+  Enabled: true
+
+LiteralInInterpolation:
+  Enabled: true
+
+Loop:
+  Enabled: false
+
+ParenthesesAsGroupedExpression:
+  Enabled: true
+
+RequireParentheses:
+  Enabled: true
+
+UnderscorePrefixedVariableName:
+  Enabled: true
+
+Void:
+  Enabled: false
+
+# Rails
+
+ActionFilter:
+  Enabled: false
+
+DefaultScope:
+  Enabled: false
+
+HasAndBelongsToMany:
+  Enabled: false
+
+ReadWriteAttribute:
+  Enabled: false
+
+ScopeArgs:
+  Enabled: false
+
+Validation:
+  Enabled: false
+
+Output:
+  Enabled: false
