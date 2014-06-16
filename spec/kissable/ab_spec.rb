@@ -64,34 +64,23 @@ describe Kissable::AB do
   describe '#group' do
     let(:group) { ab_test.group(cookies) }
 
-    xit "is a struct" do
-      expect(group).to be_a(Struct)
-    end
-
-    describe "name" do
-      xit "is the test_name" do
-        expect(group.name).to eq(test_name)
-      end
-    end
-
     it "is returns Original or Variant" do
       expect(group).to match(/Original|Variant/)
     end
 
-
     context "when cookie exists" do
       before :each do
-        ab_test.stub(:cookies).and_return({'abid' => 1})
+        ab_test.stub(:cookies).and_return('abid' => 1)
       end
 
       it "doesn't change the cookie" do
-        expect{group}.to_not change{ab_test.cookies}
+        expect { group }.to_not change { ab_test.cookies }
       end
     end
 
     context "when cookie doesn't exist" do
       it "sets a cookie" do
-        expect{group}.to change{ab_test.cookies}.from({})
+        expect { group }.to change { ab_test.cookies }.from({})
       end
 
       describe "the cookie" do
@@ -141,17 +130,19 @@ describe Kissable::AB do
 
   describe "#tracking_script" do
     let(:group) { 'Original' }
+    let(:tracking_script) { ab_test.tracking_script(group) }
 
     it "returns an embeddable script" do
-      expect(ab_test.tracking_script(group)).to match(/^<script>.*<\/script>$/)
+      expect(tracking_script).to match(/^<script>.*<\/script>$/)
     end
 
     it "contains the _kmq push event" do
-      expect(ab_test.tracking_script(group)).to include("_kmq.push")
+      expect(tracking_script).to include("_kmq.push")
     end
 
     it "sets the property to the id passed" do
-      expect(ab_test.tracking_script(group)).to include("['set', {'#{test_name}' : 'Original'}]")
+      set_js_cookie_data = "['set', {'#{test_name}' : 'Original'}]"
+      expect(tracking_script).to include(set_js_cookie_data)
     end
   end
 end
