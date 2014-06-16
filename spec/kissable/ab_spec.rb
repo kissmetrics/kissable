@@ -138,4 +138,20 @@ describe Kissable::AB do
       end
     end
   end
+
+  describe "#tracking_script" do
+    let(:group) { 'Original' }
+
+    it "returns an embeddable script" do
+      expect(ab_test.tracking_script(group)).to match(/^<script>.*<\/script>$/)
+    end
+
+    it "contains the _kmq push event" do
+      expect(ab_test.tracking_script(group)).to include("_kmq.push")
+    end
+
+    it "sets the property to the id passed" do
+      expect(ab_test.tracking_script(group)).to include("['set', {'#{test_name}' : 'Original'}]")
+    end
+  end
 end

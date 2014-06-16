@@ -31,6 +31,10 @@ module Kissable
       @cookies ||= {}
     end
 
+    def tracking_script(group)
+      "<script>_kmq.push(['set', {'#{test_name}' : '#{group}'}]);</script>"
+    end
+
     private
 
     def cookie_exists?
