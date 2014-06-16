@@ -15,8 +15,4 @@ module Kissable
   def self.configure
     yield(configuration)
   end
-
-  def self.tracking_script(abid)
-    "<script>_kmq.push(['set', {'#{abid.name}' : '#{abid.id}'}]);</script>"
-  end
 end

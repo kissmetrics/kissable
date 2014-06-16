@@ -31,15 +31,15 @@ Kissable::AB.new(testname, groups, ratio)
 * `testname` (required) This should be unique per test. It both passes the property to KM tracking as well as helps generate unique user groups for the test.
 * `groups` (optional) This is used to name the groups used in the test. It will accept up to four group names. Defaults to `%w{Original Variant}`.
 * `ratio` (optional) The ratio of how you want users sent to the specified groups. It expects all weightings to equal 100. It defaults to an even weight for all groups in the test.
-* Store the result from `identity` and use it to set up a switch in the relevant controller.
+* Store the result from `group` and use it to set up a switch in the relevant controller.
 
 ```ruby
 # home_controller.rb
 def index
-  @ab_test = Kissable::AB.new('top-navigation or side-navigation test')
-  @users_identity = @ab_test.identity
+  @ab_test = Kissable::AB.new('top-navigation test')
+  @users_ab_group = @ab_test.group(cookies)
 
-  case @users_identity.id
+  case @users_ab_group
   when 'Original'
     render 'index'
   else
@@ -58,18 +58,18 @@ end
 
 ```ruby
 ab = Kissable::AB.new('some cool test')
-ab.identity(cookies)
+ab.group(cookies)
 ```
 
 ### Sinatra
 
-Sinatra handles cookies much differently than Rails. Sinatra stores the cookies which were sent in the request object in `request` and the cookies which will be sent back to the user in the `response` object. In order to make this as easy as possible, Kissable uses a Sinatra cookie adapter. This adapter needs to be instantiated with the `request` and `response` objects, then passed to identity.
+Sinatra handles cookies much differently than Rails. Sinatra stores the cookies which were sent in the request object in `request` and the cookies which will be sent back to the user in the `response` object. In order to make this as easy as possible, Kissable uses a Sinatra cookie adapter. This adapter needs to be instantiated with the `request` and `response` objects, then passed to `group`.
 
 ```ruby
 sca = Kissable::SinatraCookieAdapter.new(request, response)
 
 ab = Kissable::AB.new('some cool test')
-ab.identity(sca)
+users_ab_group = ab.group(sca)
 ```
 
 ### Configuration
