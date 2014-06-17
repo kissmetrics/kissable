@@ -52,10 +52,11 @@ describe Kissable::AB do
 
       context "when ratios don't add up to 100" do
         let(:ratios) { [90, 5] }
-        let(:groups) { ["one", "two"] }
+        let(:groups) { %w("one", "two") }
 
         it "raises an error" do
-          expect{ab_test}.to raise_error(ArgumentError, "ABHelper ratios sum to 95 not 100")
+          message = "Kissable ratios sum to 95 not 100"
+          expect { ab_test }.to raise_error(ArgumentError, message)
         end
       end
     end
