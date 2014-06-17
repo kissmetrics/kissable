@@ -50,11 +50,11 @@ module Kissable
     end
 
     def abset
-      @abset if @abset
+      return @abset if @abset
 
       sum = 0
-      @abset = Hash.new
-      @abset = groups.zip(ratios.map! { |i| sum += i })
+      @abset = {}
+      @abset = groups.zip(ratios.map { |i| sum += i })
     end
 
     # Simply reads/sets the cookie used for control
@@ -89,7 +89,7 @@ module Kissable
         default_values.merge!(:domain => Kissable.configuration.domain)
       end
 
-      return default_values
+      default_values
     end
 
     def cookie_name
@@ -106,7 +106,7 @@ module Kissable
         raise ArgumentError, 'Mismatch with groups and ratios'
       end
       total = ratios.inject(0) { |tot, rate| tot + rate.to_i }
-      raise ArgumentError, "ABHelper ratios sum to #{total} not 100" unless total == 100
+      raise ArgumentError, "Kissable ratios sum to #{total} not 100" unless total == 100
     end
   end
 end
