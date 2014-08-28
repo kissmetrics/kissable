@@ -20,7 +20,7 @@ describe Kissable::Configuration do
 
   context "when Logger is written to" do
     it "doesn't have an error" do
-      expect {Kissable.configuration.logger.info("test")}.to_not raise_error
+      expect { Kissable.configuration.logger.info("test") }.to_not raise_error
     end
   end
 end
