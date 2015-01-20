@@ -19,19 +19,13 @@ module Kissable
       validate_ratios
     end
 
-    def group(cookies)
-      @cookies = cookies
+    # Assigns a test group based on the 'abid' cookie or login (email).
+    # Takes either a cookies object (Hash-like) or login (String).
+    def group(object)
+      (object.is_a? String) ? (@login = object) : (@cookies = object)
 
       abset.each do |i, val|
         return i if val > seed
-      end
-    end
-
-    def group_by_login(login)
-      @login = login
-
-      abset.each do |i, val|
-        return i if val > seed_by_login
       end
     end
 
@@ -54,11 +48,10 @@ module Kissable
     end
 
     def seed
-      @seed ||= (sha ^ ab_cookie_value) % 100
-    end
+      return @seed if @seed
 
-    def seed_by_login
-      @seed ||= (sha ^ login_sha) % 100
+      xor = @login ? login_sha : ab_cookie_value
+      @seed = (sha ^ xor) % 100
     end
 
     def login_sha
