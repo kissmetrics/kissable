@@ -4,7 +4,7 @@ module Kissable
   class AB
     MAX_GROUP_COUNT = 4
 
-    attr_reader :groups, :ratios, :test_name
+    attr_reader :groups, :login, :ratios, :test_name
 
     def initialize(test_name, groups=nil, ratios=nil)
       @test_name = test_name
@@ -24,6 +24,14 @@ module Kissable
 
       abset.each do |i, val|
         return i if val > seed
+      end
+    end
+
+    def group_by_login(login)
+      @login = login
+
+      abset.each do |i, val|
+        return i if val > seed_by_login
       end
     end
 
@@ -47,6 +55,14 @@ module Kissable
 
     def seed
       @seed ||= (sha ^ ab_cookie_value) % 100
+    end
+
+    def seed_by_login
+      @seed ||= (sha ^ login_sha) % 100
+    end
+
+    def login_sha
+      @login_sha = Digest::SHA1.hexdigest(login).to_i(16)
     end
 
     def abset
