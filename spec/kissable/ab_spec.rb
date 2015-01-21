@@ -5,7 +5,7 @@ describe Kissable::AB do
   let(:groups) { nil }
   let(:ratios) { nil }
   let(:cookies) { {} }
-  let(:login) { "jsmith@example.com" }
+  let(:login) { 'jsmith@example.com' }
   let(:ab_test) { described_class.new(test_name, groups, ratios) }
 
   describe '#initialize' do
@@ -64,10 +64,10 @@ describe Kissable::AB do
   end
 
   describe '#group' do
-    context "when using cookies to group" do
+    context "when using cookies" do
       let(:group) { ab_test.group(cookies) }
 
-      it "is returns Original or Variant" do
+      it "returns Original or Variant" do
         expect(group).to match(/Original|Variant/)
       end
 
@@ -131,14 +131,14 @@ describe Kissable::AB do
       end
     end
 
-    context "when using login to group" do
+    context "when using login" do
       let(:group) { ab_test.group(login) }
 
       it "returns Original or Variant" do
         expect(group).to match(/Original|Variant/)
       end
 
-      it "returns the same group for an email" do
+      it "always returns the same group" do
         10.times do
           test_copy = described_class.new(test_name)
           expect(test_copy.group(login)).to eq(group)
