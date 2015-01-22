@@ -1,3 +1,3 @@
 module Kissable
-  VERSION = "1.0.0a1"
+  VERSION = "1.0.1"
 end

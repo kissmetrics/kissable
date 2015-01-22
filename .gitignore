@@ -2,9 +2,11 @@
 *.rbc
 .bundle
 .config
+.vagrant
 .yardoc
 Gemfile.lock
 InstalledFiles
+Vagrantfile
 _yardoc
 coverage
 doc/

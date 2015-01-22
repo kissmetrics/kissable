@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-Kissable enables you to conduct a/b tests contingent on users having cookies enabled. To conduct a test you need to have a name for a test and specify how many groups you want and the ratios of these groups.
+Kissable helps you run A/B tests by breaking up your users into test groups (e.g. Original vs. Variant). Name your test, list your test groups, and the ratio at which people should be distributed to each group. Kissable does the assignment pseudo-randomly.
+
+For anonymous users cookies must be enabled. Cookies are used to assign a user to a group and keep him there. For logged in users a unique identifier (e.g. login) is used instead for the same purpose.
 
 You instantiate the object with these items.
 
@@ -54,6 +56,14 @@ end
   ab_test = Kissable::AB.new('top-navigation test')
   users_ab_group = ab_test.group(cookies)
   ab_test.tracking_script(users_ab_group)
+```
+
+* For logged in users, you can use some unique identifier instead.
+
+```ruby
+  ab_test = Kissable::AB.new('top-navigation test')
+  users_ab_group = ab_test.group(email)
+  # Add your custom tracking code here.
 ```
 
 ### Rails

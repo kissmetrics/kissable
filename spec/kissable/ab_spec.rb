@@ -5,6 +5,7 @@ describe Kissable::AB do
   let(:groups) { nil }
   let(:ratios) { nil }
   let(:cookies) { {} }
+  let(:login) { 'jsmith@example.com' }
   let(:ab_test) { described_class.new(test_name, groups, ratios) }
 
   describe '#initialize' do
@@ -63,67 +64,84 @@ describe Kissable::AB do
   end
 
   describe '#group' do
-    let(:group) { ab_test.group(cookies) }
+    context "when using cookies" do
+      let(:group) { ab_test.group(cookies) }
 
-    it "is returns Original or Variant" do
-      expect(group).to match(/Original|Variant/)
-    end
-
-    context "when cookie exists" do
-      before :each do
-        ab_test.stub(:cookies).and_return('abid' => 1)
+      it "returns Original or Variant" do
+        expect(group).to match(/Original|Variant/)
       end
 
-      it "doesn't change the cookie" do
-        expect { group }.to_not change { ab_test.cookies }
+      context "when cookie exists" do
+        before :each do
+          ab_test.stub(:cookies).and_return('abid' => 1)
+        end
+
+        it "doesn't change the cookie" do
+          expect { group }.to_not change { ab_test.cookies }
+        end
       end
-    end
 
-    context "when cookie doesn't exist" do
-      it "sets a cookie" do
-        expect { group }.to change { ab_test.cookies }.from({})
-      end
+      context "when cookie doesn't exist" do
+        it "sets a cookie" do
+          expect { group }.to change { ab_test.cookies }.from({})
+        end
 
-      describe "the cookie" do
-        let(:cookie) { ab_test.cookies['abid'] }
+        describe "the cookie" do
+          let(:cookie) { ab_test.cookies['abid'] }
 
-        context "when the domain has been configured" do
-          let(:domain) { 'someaweseomedomain.com' }
+          context "when the domain has been configured" do
+            let(:domain) { 'someaweseomedomain.com' }
 
-          it "has the domain key set to the correct value" do
-            Kissable.configure do |config|
-              config.domain = domain
+            it "has the domain key set to the correct value" do
+              Kissable.configure do |config|
+                config.domain = domain
+              end
+
+              group
+              expect(cookie).to include(:domain => domain)
             end
+          end
 
+          context "when the domain hasn't been configured" do
+            it "doesn't include a domain key" do
+              Kissable.configure do |config|
+                config.domain = nil
+              end
+
+              group
+              expect(cookie).to_not include(:domain)
+            end
+          end
+
+          it "expires" do
             group
-            expect(cookie).to include(:domain => domain)
+            expect(cookie).to include(:expires)
+          end
+
+          it "has a path" do
+            group
+            expect(cookie).to include(:path => "/")
+          end
+
+          it "contains a value" do
+            group
+            expect(cookie).to include(:value)
           end
         end
+      end
+    end
 
-        context "when the domain hasn't been configured" do
-          it "doesn't include a domain key" do
-            Kissable.configure do |config|
-              config.domain = nil
-            end
+    context "when using login" do
+      let(:group) { ab_test.group(login) }
 
-            group
-            expect(cookie).to_not include(:domain)
-          end
-        end
+      it "returns Original or Variant" do
+        expect(group).to match(/Original|Variant/)
+      end
 
-        it "expires" do
-          group
-          expect(cookie).to include(:expires)
-        end
-
-        it "has a path" do
-          group
-          expect(cookie).to include(:path => "/")
-        end
-
-        it "contains a value" do
-          group
-          expect(cookie).to include(:value)
+      it "always returns the same group" do
+        10.times do
+          test_copy = described_class.new(test_name)
+          expect(test_copy.group(login)).to eq(group)
         end
       end
     end
